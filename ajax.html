@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Who is Batman</h1>
+    <img src="" alt="">
+    <button>Click</button>
+
+    <!-- get the infor have button when ypou click the button the information should 
+    without refresh the page0o -->
+    <script>
+
+        let dataOnly = new XMLHttpRequest();
+
+        dataOnly.addEventListener("load", function() {
+
+            let data = JSON.parse(this.responseText);
+
+            let users = {
+                name: data.results[0].name.first,
+                email: data.results[0].phone,
+            }
+
+            console.log(users)
+
+            console.log(data.results[0]);
+
+            document.getElementsByTagName("img")[0].src = data.results[0].picture.large
+
+            console.log(this.readyState);
+
+
+
+            console.log(dataOnly.getResponseHeader("content-type"))
+
+
+            
+        })
+        
+
+        dataOnly.addEventListener("readystatechange", function() {
+            // if(this.readyState == 1) {
+            //     alert("data is initialized");
+            // }
+
+            // if(this.readyState == 2) {
+            //     alert("data is recieved");
+            // }
+
+            // if(this.readyState == 3) {
+            //     alert("data is processed");
+            // }
+
+            // console.log(this.statusText);
+
+            // function waitForRandom() {
+            //     if(dataOnly.readyState == 4) {
+            //     alert("data is finished and ready");
+            //     }
+
+            //     console.log("yes");
+            // }
+
+            // setTimeout(waitForRandom, 5000);
+
+    
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        dataOnly.open("GET", "https://randomuser.me/api/")
+
+        dataOnly.send();
+
+    </script>
+</body>
+</html>

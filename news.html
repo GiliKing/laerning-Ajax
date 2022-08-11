@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,1,200" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="modal">
+            <h1><span class="material-symbols-outlined">refresh</span></h1>
+        </div>
+        
+    </div>
+
+
+
+
+    
+
+
+    <script>
+
+        let resultData = new XMLHttpRequest();
+
+        resultData.onload = function() {
+            data = JSON.parse(this.responseText);
+
+            console.log(data);
+
+            let countData = data.articles.length
+
+            if(this.readyState == 4) {
+                setTimeout(waitOnly, 7000)
+            }
+
+            function waitOnly() {
+                    for(let i = 0; i < countData; i++) {
+                        let div1 = document.createElement("div");
+                        div1.style.display = "flex";
+
+                        let div_first = document.createElement("div");
+                        div_first.style.flexBasis = "50%";
+                        div_first.style.border = "1px solid red";
+
+
+                        let text = document.createTextNode("Yes working");
+                        div_first.appendChild(text);
+                        
+                        let div_second = document.createElement("div");
+                        div_second.style.flexBasis = "50%";
+                        div_second.style.border = "1px solid red";
+
+
+                        let text1 = document.createTextNode("Yes working");
+
+                        div_second.appendChild(text1);
+
+                        div1.appendChild(div_first);
+                        div1.appendChild(div_second)
+
+                        document.getElementsByClassName("container")[0].appendChild(div1);
+                    }
+                }
+
+        }
+
+        resultData.onreadystatechange = function() {
+
+            let perfect = [];
+
+            if(resultData.readyState == 4 && resultData.status == 200) {
+                setTimeout(waitOnly, 7000)
+            }
+
+            function waitOnly() {
+                document.getElementsByClassName("modal")[0].style.opacity = "0"
+                document.getElementsByClassName("modal")[0].style.display = "none";
+                document.getElementsByClassName("modal")[0].style.transition = ".1s ease"
+
+                if(perfect.length != 0) {
+                    window.location.href = "error.html"
+                }
+            }
+
+            if(resultData.readyState != 4 && resultData.status != 200) {
+
+                perfect.push("error")
+                
+                setTimeout(waitOnly, 7000)
+            }
+
+        
+
+            console.log(this.status);
+        }
+        
+
+        resultData.open("GET", "https://newsapi.org/v2/top-headlines?country=ng&apiKey=91386c9e7b2941f0a05dbcd939f18f0f")
+
+        resultData.send();
+
+    </script>
+</body>
+</html>

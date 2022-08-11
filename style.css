@@ -1,0 +1,34 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+
+.container {
+    width: 90%;
+    margin: 0px auto;
+}
+
+h1 .material-symbols-outlined {
+    font-size: 300px;
+    color: blue;
+    animation: rotate 1s linear infinite;
+}
+
+.modal {
+    box-shadow: 2px 2px 5px 5px lightgrey;
+    border-radius: 5px;
+    text-align: center;
+    width: 40%;
+    margin: 100px auto;
+    opacity: 1;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
